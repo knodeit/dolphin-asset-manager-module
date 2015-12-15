@@ -1,11 +1,11 @@
 {
     "name": "dolphin-asset-manager-package",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "preferGlobal": true,
     "description": "Asset manager package",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/knodeit/dolphin-html-render-package"
+        "url": "git+https://github.com/knodeit/dolphin-asset-manager-package"
     },
     "dependencies": {
         "q": "~1.4.1",
