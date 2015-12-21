@@ -1,5 +1,5 @@
 {
-    "name": "dolphin-asset-manager-package",
+    "name": "dolphin-asset-manager-module",
     "version": "0.0.3",
     "preferGlobal": false,
     "description": "Asset manager package",
