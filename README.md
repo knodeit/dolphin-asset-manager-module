@@ -26,14 +26,14 @@ and move to `public` folder in root project. Also will build a json file `bundle
 ```
 myModule.configureFactories(function (AssetManagerConfigurationFactory) {
 
-    AssetManagerConfigurationFactory.addVendorStyle('path to file or mask like ./*.js'));
+    AssetManagerConfigurationFactory.addVendorStyle('path to file or mask like ./*.css');
     
-    AssetManagerConfigurationFactory.addVendorScript('path to file or mask like ./*.js'));
+    AssetManagerConfigurationFactory.addVendorScript('path to file or mask like ./*.js');
     
-    AssetManagerConfigurationFactory.addCustomStyles('path to file or mask like ./*.js'));
+    AssetManagerConfigurationFactory.addCustomStyles('path to file or mask like ./*.css');
     
-    AssetManagerConfigurationFactory.addCustomScript('path to file or mask like ./*.js'));
+    AssetManagerConfigurationFactory.addCustomScript('path to file or mask like ./*.js');
     
-    AssetManagerConfigurationFactory.addAssetFolder('path to file or mask like ./*.js'));
+    AssetManagerConfigurationFactory.addAssetFolder('path to file or mask like ./*');
 });
 ```
