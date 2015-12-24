@@ -29,6 +29,13 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
         //init config
         var confFile = {
             bundle: {
+                beforeVendor: {
+                    styles: [],
+                    scripts: [],
+                    options: {
+                        useMin: true
+                    }
+                },
                 vendor: {
                     styles: [],
                     scripts: [],
@@ -36,7 +43,32 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
                         useMin: true
                     }
                 },
+                afterVendor: {
+                    styles: [],
+                    scripts: [],
+                    options: {
+                        useMin: true
+                    }
+                },
+                beforeCustom: {
+                    styles: [],
+                    scripts: [],
+                    options: {
+                        uglify: true,
+                        minCSS: true,
+                        useMin: true
+                    }
+                },
                 custom: {
+                    styles: [],
+                    scripts: [],
+                    options: {
+                        uglify: true,
+                        minCSS: true,
+                        useMin: true
+                    }
+                },
+                afterCustom: {
                     styles: [],
                     scripts: [],
                     options: {
@@ -56,6 +88,18 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
             confFile.copy.push(bundle.assets[i]);
         }
 
+        //before vendor
+        if (Object.keys(bundle.beforeVendor.scripts).length > 0) {
+            for (i in bundle.beforeVendor.scripts) {
+                confFile.bundle.beforeVendor.scripts.push(bundle.beforeVendor.scripts[i]);
+            }
+        }
+        if (Object.keys(bundle.beforeVendor.styles).length > 0) {
+            for (i in bundle.beforeVendor.styles) {
+                confFile.bundle.beforeVendor.styles.push(bundle.beforeVendor.styles[i]);
+            }
+        }
+
         //vendor
         if (Object.keys(bundle.vendor.scripts).length > 0) {
             for (i in bundle.vendor.scripts) {
@@ -68,6 +112,30 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
             }
         }
 
+        //after vendor
+        if (Object.keys(bundle.afterVendor.scripts).length > 0) {
+            for (i in bundle.afterVendor.scripts) {
+                confFile.bundle.afterVendor.scripts.push(bundle.afterVendor.scripts[i]);
+            }
+        }
+        if (Object.keys(bundle.afterVendor.styles).length > 0) {
+            for (i in bundle.afterVendor.styles) {
+                confFile.bundle.afterVendor.styles.push(bundle.afterVendor.styles[i]);
+            }
+        }
+
+        //before custom
+        if (Object.keys(bundle.beforeCustom.scripts).length > 0) {
+            for (i in bundle.beforeCustom.scripts) {
+                confFile.bundle.beforeCustom.scripts.push(bundle.beforeCustom.scripts[i]);
+            }
+        }
+        if (Object.keys(bundle.beforeCustom.styles).length > 0) {
+            for (i in bundle.beforeCustom.styles) {
+                confFile.bundle.beforeCustom.styles.push(bundle.beforeCustom.styles[i]);
+            }
+        }
+
         //custom
         if (Object.keys(bundle.custom.scripts).length > 0) {
             for (i in bundle.custom.scripts) {
@@ -77,6 +145,18 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
         if (Object.keys(bundle.custom.styles).length > 0) {
             for (i in bundle.custom.styles) {
                 confFile.bundle.custom.styles.push(bundle.custom.styles[i]);
+            }
+        }
+
+        //after custom
+        if (Object.keys(bundle.afterCustom.scripts).length > 0) {
+            for (i in bundle.afterCustom.scripts) {
+                confFile.bundle.afterCustom.scripts.push(bundle.afterCustom.scripts[i]);
+            }
+        }
+        if (Object.keys(bundle.afterCustom.styles).length > 0) {
+            for (i in bundle.afterCustom.styles) {
+                confFile.bundle.afterCustom.styles.push(bundle.afterCustom.styles[i]);
             }
         }
 
