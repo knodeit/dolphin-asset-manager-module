@@ -29,7 +29,9 @@ var bundle = {
     afterCustom: {
         styles: {},
         scripts: {}
-    }
+    },
+    front: [],
+    dashboard: []
 };
 
 module.exports = {
@@ -136,6 +138,12 @@ module.exports = {
         },
         getPromises: function () {
             return promises;
+        },
+        addFrontStyles: function (file) {
+            bundle.front.push(file);
+        },
+        addDashboardStyle: function (file) {
+            bundle.dashboard.push(file);
         }
     }
 };

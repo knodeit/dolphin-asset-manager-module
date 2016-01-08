@@ -76,6 +76,20 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
                         minCSS: true,
                         useMin: true
                     }
+                },
+                front: {
+                    styles: [],
+                    options: {
+                        minCSS: true,
+                        rev: false
+                    }
+                },
+                dashboard: {
+                    styles: [],
+                    options: {
+                        minCSS: true,
+                        rev: false
+                    }
                 }
             },
             copy: []
@@ -158,6 +172,15 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
             for (i in bundle.afterCustom.styles) {
                 confFile.bundle.afterCustom.styles.push(bundle.afterCustom.styles[i]);
             }
+        }
+
+        //css front
+        if (bundle.front.length > 0) {
+            confFile.bundle.front.styles = bundle.front;
+        }
+        //css dashboard
+        if (bundle.dashboard.length > 0) {
+            confFile.bundle.dashboard.styles = bundle.dashboard;
         }
 
         //write conf to file
