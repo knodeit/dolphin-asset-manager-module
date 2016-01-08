@@ -56,7 +56,12 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
                     options: {
                         uglify: true,
                         minCSS: true,
-                        useMin: true
+                        useMin: true,
+                        pluginOptions: {
+                            'gulp-uglify': {
+                                mangle: false
+                            }
+                        }
                     }
                 },
                 custom: {
@@ -65,7 +70,12 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
                     options: {
                         uglify: true,
                         minCSS: true,
-                        useMin: true
+                        useMin: true,
+                        pluginOptions: {
+                            'gulp-uglify': {
+                                mangle: false
+                            }
+                        }
                     }
                 },
                 afterCustom: {
@@ -74,7 +84,12 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
                     options: {
                         uglify: true,
                         minCSS: true,
-                        useMin: true
+                        useMin: true,
+                        pluginOptions: {
+                            'gulp-uglify': {
+                                mangle: false
+                            }
+                        }
                     }
                 },
                 front: {
