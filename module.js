@@ -6,7 +6,12 @@
 var Module = require('dolphin-core-modules').Module;
 var gulp = require('gulp');
 var rimraf = require('gulp-rimraf');
+var lazypipe = require('lazypipe');
+var sass = require('gulp-sass');
+var less = require('gulp-less');
+var gif = require('gulp-if');
 var bundleAssets = require('gulp-bundle-assets');
+var replace = require('replace-in-file');
 var fs = require('fs');
 var Q = require('q');
 var deferred = Q.defer();
@@ -25,6 +30,32 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
         var destPath = process.cwd() + '/public';
         var urlPath = '/public/';
         var i;
+
+        function stringEndsWith(str, suffix) {
+            return str.indexOf(suffix, str.length - suffix.length) !== -1;
+        }
+
+        // only run transforms against certain file types.
+        // This is only necessary if your bundle has a mix of file types in it
+        function isScssFile(file) {
+            return stringEndsWith(file.relative, 'scss');
+        }
+
+        function isLessFile(file) {
+            return stringEndsWith(file.relative, 'less');
+        }
+
+        // pipe as many transforms together as you like
+        var styleTransforms = lazypipe()
+            .pipe(function () {
+                // when using lazy pipe you need to call gulp-if from within an anonymous func
+                // https://github.com/robrich/gulp-if#works-great-inside-lazypipe
+                return gif(isScssFile, sass());
+            })
+            .pipe(function () {
+                return gif(isLessFile, less());
+            });
+
 
         //init config
         var confFile = {
@@ -103,7 +134,10 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
                     styles: [],
                     options: {
                         minCSS: true,
-                        rev: false
+                        rev: false,
+                        transforms: {
+                            styles: '{FUNCTION}'
+                        }
                     }
                 }
             },
@@ -198,8 +232,13 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
             confFile.bundle.dashboard.styles = bundle.dashboard;
         }
 
+        var template = fs.readFileSync(__dirname + '/config_template.js').toString();
+        var content = 'module.exports=' + JSON.stringify(confFile) + ';';
+        content = content.replace('"{FUNCTION}"', 'styleTransforms');
+        template = template.replace('{MODULE.EXPORTS}', content);
+
         //write conf to file
-        fs.writeFileSync(__dirname + '/bundle.config.js', 'module.exports=' + JSON.stringify(confFile) + ';', 'utf-8');
+        fs.writeFileSync(__dirname + '/bundle.config.js', template, 'utf-8');
 
         gulp.task('AssetManager:bundle', ['AssetManager:clean'], function () {
             return gulp.src(__dirname + '/bundle.config.js')
