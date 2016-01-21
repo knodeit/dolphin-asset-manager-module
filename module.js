@@ -11,7 +11,6 @@ var sass = require('gulp-sass');
 var less = require('gulp-less');
 var gif = require('gulp-if');
 var bundleAssets = require('gulp-bundle-assets');
-var replace = require('replace-in-file');
 var fs = require('fs');
 var Q = require('q');
 var deferred = Q.defer();
