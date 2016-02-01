@@ -31,7 +31,9 @@ var bundle = {
         scripts: {}
     },
     front: [],
-    dashboard: []
+    dashboard: [],
+    overrideFront:[],
+    overrideDashboard:[]
 };
 
 module.exports = {
@@ -144,6 +146,12 @@ module.exports = {
         },
         addDashboardStyle: function (file) {
             bundle.dashboard.push(file);
+        },
+        addFrontOverrideStyle: function (file) {
+            bundle.overrideFront.push(file);
+        },
+        addDashboardOverrideStyle: function (file) {
+            bundle.overrideDashboard.push(file);
         }
     }
 };

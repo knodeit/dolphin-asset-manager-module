@@ -1,6 +1,6 @@
 {
     "name": "dolphin-asset-manager-module",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "preferGlobal": false,
     "description": "Asset manager package",
     "repository": {
