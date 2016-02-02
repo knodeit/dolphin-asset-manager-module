@@ -2,6 +2,7 @@
  * Created by Vadim on 12/10/15.
  */
 'use strict';
+var _ = require('lodash');
 var modules = [];
 var promises = [];
 var bundle = {
@@ -43,7 +44,7 @@ module.exports = {
             modules.push(module);
         },
         getModules: function () {
-            return modules;
+            return _.uniq(modules);
         },
         addVendorStyleBefore: function (src, minSrc) {
             var key = src || minSrc;
