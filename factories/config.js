@@ -31,10 +31,11 @@ var bundle = {
         styles: {},
         scripts: {}
     },
-    front: [],
-    dashboard: [],
-    overrideFront:[],
-    overrideDashboard:[]
+    front: {},
+    dashboard: {},
+    overrideFront: {},
+    overrideDashboard: {},
+    cssFiles: {}
 };
 
 module.exports = {
@@ -143,16 +144,19 @@ module.exports = {
             return promises;
         },
         addFrontStyles: function (file) {
-            bundle.front.push(file);
+            bundle.front[file] = file;
         },
         addDashboardStyle: function (file) {
-            bundle.dashboard.push(file);
+            bundle.dashboard[file] = file;
         },
         addFrontOverrideStyle: function (file) {
-            bundle.overrideFront.push(file);
+            bundle.overrideFront[file] = file;
         },
         addDashboardOverrideStyle: function (file) {
-            bundle.overrideDashboard.push(file);
+            bundle.overrideDashboard[file] = file;
+        },
+        addCssFile: function (obj) {
+            bundle.cssFiles[obj.fileName] = obj;
         }
     }
 };

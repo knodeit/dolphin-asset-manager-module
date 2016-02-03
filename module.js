@@ -220,20 +220,43 @@ myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationF
         }
 
         //css front
-        if (bundle.front.length > 0) {
-            confFile.bundle.front.styles = bundle.front;
+        if (Object.keys(bundle.front).length > 0) {
+            for (i in bundle.front) {
+                confFile.bundle.front.styles = bundle.front[i];
+            }
         }
         //css dashboard
-        if (bundle.dashboard.length > 0) {
-            confFile.bundle.dashboard.styles = bundle.dashboard;
+        if (Object.keys(bundle.dashboard).length > 0) {
+            for (i in bundle.dashboard) {
+                confFile.bundle.dashboard.styles = bundle.dashboard[i];
+            }
         }
         //css override front
-        if (bundle.overrideFront.length > 0) {
-            confFile.bundle['front-override'].styles = bundle.overrideFront;
+        if (Object.keys(bundle.overrideFront).length > 0) {
+            for (i in bundle.overrideFront) {
+                confFile.bundle['front-override'].styles = bundle.overrideFront[i];
+            }
         }
         //css override dashboard
-        if (bundle.overrideDashboard.length > 0) {
-            confFile.bundle['dashboard-override'].styles = bundle.overrideDashboard;
+        if (Object.keys(bundle.overrideDashboard).length > 0) {
+            for (i in bundle.overrideDashboard) {
+                confFile.bundle['dashboard-override'].styles = bundle.overrideDashboard[i];
+            }
+        }
+
+        if (Object.keys(bundle.cssFiles).length > 0) {
+            for (i in bundle.cssFiles) {
+                confFile.bundle[bundle.cssFiles[i].fileName] = {
+                    styles: [bundle.cssFiles[i].source],
+                    options: {
+                        minCSS: true,
+                        rev: false,
+                        transforms: {
+                            styles: '{FUNCTION}'
+                        }
+                    }
+                };
+            }
         }
 
         var template = fs.readFileSync(__dirname + '/config_template.js').toString();
