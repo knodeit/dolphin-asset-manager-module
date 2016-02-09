@@ -143,7 +143,7 @@ module.exports = {
         getPromises: function () {
             return promises;
         },
-        addFrontStyles: function (file) {
+        addFrontStyle: function (file) {
             bundle.front[file] = file;
         },
         addDashboardStyle: function (file) {
