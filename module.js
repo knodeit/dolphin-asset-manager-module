@@ -23,6 +23,12 @@ myModule.configureFactories(function (WebServerConfigurationFactory) {
 });
 
 myModule.run(function (WebServerConfigurationFactory, AssetManagerConfigurationFactory) {
+    //hack pm2 for multi thread
+    if (process.env.pm_id && process.env.pm_id !== '0') {
+        return deferred.resolve();
+    }
+
+
     //wait for other modules
     var promises = AssetManagerConfigurationFactory.getPromises();
     Q.all(promises).then(function () {
