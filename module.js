@@ -2,7 +2,7 @@
  * Created by Vadim on 12/3/15.
  */
 'use strict';
-
+var isCronMode = require('dolphin-core').isCronMode();
 var Module = require('dolphin-core-modules').Module;
 var gulp = require('gulp');
 var rimraf = require('gulp-rimraf');
@@ -16,6 +16,11 @@ var Q = require('q');
 var deferred = Q.defer();
 
 var myModule = new Module('AssetManager', __dirname);
+
+//don't run is cron mode
+if (isCronMode) {
+    return;
+}
 
 myModule.configureFactories(function (WebServerConfigurationFactory) {
     WebServerConfigurationFactory.addPromise(deferred.promise);
