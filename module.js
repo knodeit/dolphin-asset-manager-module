@@ -17,8 +17,8 @@ var deferred = Q.defer();
 
 var myModule = new Module('AssetManager', __dirname);
 
-//don't run is cron mode
-if (isCronMode) {
+//don't run if it's cron mode or nmp test
+if (isCronMode || process.env.DOLPHIN_ASSETS_OFF) {
     return;
 }
 
